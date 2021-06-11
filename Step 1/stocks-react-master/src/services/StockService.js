@@ -54,32 +54,19 @@ class StockService {
     axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
     
     return axios
-      .get(`http://localhost:8082/transformers/stocks?symbols=`+symbols)
-      .then(results => {
-        console.log(results);
-        return results.data.map(d => {
-          d.changePercentFormatted = 0;
-          if(d.changePercent !== null)
-             this.round(d.changePercent * 100)+ '%';
-          d.marketCapFormatted = this.abbreviateNumber(d.marketCap);
-          return d;
-        });
+    .get(`http://localhost:8082/api/v1/stocks`)
+    .then(results => {
+      console.log(results);
+      return results.data.map(d => {
+        d.changePercentFormatted = 0;
+        if(d.changePercent !== null)
+        d.changePercentFormatted = this.round(d.changePercent * 100)+ '%';
+        d.marketCapFormatted = this.abbreviateNumber(d.marketCap);
+        return d;
       });
+    });
   }
 
-  // getStock(symbol){
-  //   axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-  //   return axios
-  //     .get(`https://cloud.iexapis.com/stable/stock/`+symbol+`/quote?token=pk_53f96e249be3442d803886bb59504119`);
-  //     // .then(results => {
-  //     //   results.data = [results.data];
-  //     //   return results.data.map(d => {
-  //     //     d.changePercentFormatted = this.round(d.changePercent * 100) + '%';
-  //     //     d.marketCapFormatted = this.abbreviateNumber(d.marketCap);
-  //     //     return d;
-  //     //   });
-  //     // });
-  // }
 
   /**
    * Gets a list of all symbols

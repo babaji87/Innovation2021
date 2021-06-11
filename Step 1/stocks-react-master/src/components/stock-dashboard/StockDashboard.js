@@ -42,23 +42,7 @@ class StockDashboard extends Component {
         <Dimmer inverted active={this.props.isLoading}>
           <Loader>Loading ...</Loader>
         </Dimmer>
-        {/* <Dropdown placeholder='Sort By'
-          onChange={this.sortItems.bind(this)}
-          compact selection options={this.sortOptions} style={tStyle} /> */}
-        {/* <Modal open={this.props.addStockOpen}
-          closeOnEscape={true}
-          closeOnDimmerClick={true}>
-          <Modal.Header>TEST</Modal.Header>
-          <Modal.Content>
-          Hey There
-
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
-              content='Close' />
-          </Modal.Actions>
-        </Modal> */}
-        <ul className='stocks-list'>
+         <ul className='stocks-list'>
           {this.props.stocks.map(s =>
             <StockDashboardLineItem
               isEditMode={this.props.isEditMode}
@@ -71,23 +55,13 @@ class StockDashboard extends Component {
             </StockDashboardLineItem>
           )}
         </ul>
-        <AddStock
-          allSymbols={this.props.allSymbols}
-          open={this.props.addStockOpen}
-          onClose={this.onAddClose.bind(this)}
-          onSave={this.props.stockAdded}>
-        </AddStock>
         {!this.props.isEditMode ? (
           <footer className='toolbar'>
             <Button onClick={this.props.addStock}
               color='vk'
               size='large'
               content='Add Stock' />
-            {/* <Button onClick={this.props.editStart}
-              color='orange'
-              size='large'
-              content='Edit Stocks' /> */}
-          </footer>
+           </footer>
         ) : (
             <footer className='toolbar'>
               <Button onClick={this.doneEditing.bind(this)}
