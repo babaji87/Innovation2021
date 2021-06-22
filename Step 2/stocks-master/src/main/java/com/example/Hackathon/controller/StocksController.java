@@ -38,7 +38,6 @@ public class StocksController {
 		List stockList = new ArrayList();
 		List<StockDetails> allStocks= getAllStocks();
 		StringBuilder result = new StringBuilder();
-		int count=10;
 		for(StockDetails stock: allStocks){
 			HttpClient client = HttpClientBuilder.create().build();
 			String url = "https://cloud.iexapis.com/stable/stock/"+stock.getSymbol()+"/quote?token=pk_53f96e249be3442d803886bb59504119";
@@ -48,26 +47,17 @@ public class StocksController {
 
 			BufferedReader rd = new BufferedReader(
 					new InputStreamReader(response.getEntity().getContent()));
+
 			String line = "";
-			count--;
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
-				try {
-					StockDataDetail detail = new ObjectMapper().readValue(line, new TypeReference<StockDataDetail>() {
-					});
-					stocksDataRepository.save(new StocksData(detail.getSymbol(), detail.getCompanyName(), detail.getPrimaryExchange(), detail.getLatestPrice(), detail.getLatestTime()));
-				}
-				catch(Exception e)
-				{
-
-				}
-				}
-			System.out.println(count);
+				StockDataDetail detail = new ObjectMapper().readValue(line, new TypeReference<StockDataDetail>(){});
+				stocksDataRepository.save(new StocksData(detail.getSymbol(), detail.getCompanyName(), detail.getPrimaryExchange(), detail.getLatestPrice(), detail.getLatestTime()));
+			}
 			stockList.add(result);
-			if(count==0) break;
 		}
 		return ResponseEntity.ok()
-				.body(result);
+				.body(stockList.toString());
 	}
 
 	@CrossOrigin(origins = "http://localhost:3000")

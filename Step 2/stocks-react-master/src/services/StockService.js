@@ -54,12 +54,10 @@ class StockService {
     axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
     
     return axios
-    .get(`http://localhost:8083/api/v1/stocks`)
+    .get(`http://localhost:8082/api/v1/stocks`)
     .then(results => {
-      
-      var reponse = JSON.parse(results.data);
-      console.log(reponse);
-      return reponse.map(d => {
+      console.log(results);
+      return results.data.map(d => {
         d.changePercentFormatted = 0;
         if(d.changePercent !== null)
         d.changePercentFormatted = this.round(d.changePercent * 100)+ '%';
@@ -75,7 +73,7 @@ class StockService {
    */
   getAllSymbols() {
     axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-    return axios.get(`http://localhost:8083/transformers/all-stocks`)
+    return axios.get(`http://localhost:8082/transformers/all-stocks`)
                 .then(results => {
                     return results.data;
                 });

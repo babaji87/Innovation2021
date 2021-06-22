@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+
+header.site-header {
+    height: 50px;
+    background-color: $header-bg;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+}
