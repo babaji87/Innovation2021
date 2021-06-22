@@ -56,10 +56,8 @@ class StockService {
     return axios
     .get(`http://localhost:8083/api/v1/stocks`)
     .then(results => {
-      
-      var reponse = JSON.parse(results.data);
-      console.log(reponse);
-      return reponse.map(d => {
+      console.log(results);
+      return results.data.map(d => {
         d.changePercentFormatted = 0;
         if(d.changePercent !== null)
         d.changePercentFormatted = this.round(d.changePercent * 100)+ '%';

@@ -34,42 +34,69 @@ public class StocksController {
 	@GetMapping("/stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
-	public ResponseEntity<String> fetchStocks() throws IOException {
+//	public ResponseEntity<String> fetchStocks() throws IOException {
+//		List stockList = new ArrayList();
+//		List<StockDetails> allStocks= getAllStocks();
+//		StringBuilder result = new StringBuilder();
+//		int count =2;
+//		for(StockDetails stock: allStocks){
+//			HttpClient client = HttpClientBuilder.create().build();
+//			String url = "https://cloud.iexapis.com/stable/stock/"+stock.getSymbol()+"/quote?token=pk_53f96e249be3442d803886bb59504119";
+//			HttpGet request = new HttpGet(url);
+//			// add request header
+//			org.apache.http.HttpResponse response = client.execute(request);
+//			count--;
+//			BufferedReader rd = new BufferedReader(
+//					new InputStreamReader(response.getEntity().getContent()));
+//
+//			String line = "";
+//			while ((line = rd.readLine()) != null) {
+//				result.append(line);
+//
+//				try {
+//					StockDataDetail detail = new ObjectMapper().readValue(line, new TypeReference<StockDataDetail>() {
+//					});
+//					stocksDataRepository.save(new StocksData(detail.getSymbol(), detail.getCompanyName(), detail.getPrimaryExchange(), detail.getLatestPrice(), detail.getLatestTime()));
+//				}
+//				catch(Exception e)
+//				{
+//
+//				}
+//			}
+//			stockList.add(result);
+//			System.out.println(count);
+//			if(count ==0) break;
+//		}
+//		return ResponseEntity.ok()
+//				.body(stockList.toString());
+//	}
+	public ResponseEntity<String> fetchStocks(@RequestParam("count") int count) throws IOException {
 		List stockList = new ArrayList();
 		List<StockDetails> allStocks= getAllStocks();
-		StringBuilder result = new StringBuilder();
-		int count=10;
 		for(StockDetails stock: allStocks){
+			count--;
 			HttpClient client = HttpClientBuilder.create().build();
 			String url = "https://cloud.iexapis.com/stable/stock/"+stock.getSymbol()+"/quote?token=pk_53f96e249be3442d803886bb59504119";
 			HttpGet request = new HttpGet(url);
 			// add request header
-			org.apache.http.HttpResponse response = client.execute(request);
+			org.apache.http.HttpResponse response = null;
+			response = client.execute(request);
 
 			BufferedReader rd = new BufferedReader(
 					new InputStreamReader(response.getEntity().getContent()));
+
+			StringBuilder result = new StringBuilder();
 			String line = "";
-			count--;
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
-				try {
-					StockDataDetail detail = new ObjectMapper().readValue(line, new TypeReference<StockDataDetail>() {
-					});
-					stocksDataRepository.save(new StocksData(detail.getSymbol(), detail.getCompanyName(), detail.getPrimaryExchange(), detail.getLatestPrice(), detail.getLatestTime()));
-				}
-				catch(Exception e)
-				{
-
-				}
-				}
-			System.out.println(count);
+			}
 			stockList.add(result);
-			if(count==0) break;
+			System.out.println("FETCHED: " + stock.getSymbol()+ " "+ count);
+			if (count==0)break;
 		}
 		return ResponseEntity.ok()
-				.body(result);
+				.body(stockList.toString());
 	}
-
 	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/all-stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
