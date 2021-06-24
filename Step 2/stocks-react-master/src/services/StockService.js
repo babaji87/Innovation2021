@@ -54,26 +54,27 @@ class StockService {
     axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
     
     return axios
-    .get(`http://localhost:8082/api/v1/stocks`)
+    .get(`http://localhost:8090/api/v1/stocks`)
     .then(results => {
       console.log(results);
       return results.data.map(d => {
         d.changePercentFormatted = 0;
+        d.marketCapFormatted=0;
         if(d.changePercent !== null)
         d.changePercentFormatted = this.round(d.changePercent * 100)+ '%';
+        if(d.marketCap !== null)
         d.marketCapFormatted = this.abbreviateNumber(d.marketCap);
         return d;
       });
     });
   }
 
-
   /**
    * Gets a list of all symbols
    */
   getAllSymbols() {
     axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-    return axios.get(`http://localhost:8082/transformers/all-stocks`)
+    return axios.get(`http://localhost:8090/transformers/all-stocks`)
                 .then(results => {
                     return results.data;
                 });

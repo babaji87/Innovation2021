@@ -59,8 +59,10 @@ class StockService {
       console.log(results);
       return results.data.map(d => {
         d.changePercentFormatted = 0;
+        d.marketCapFormatted=0;
         if(d.changePercent !== null)
         d.changePercentFormatted = this.round(d.changePercent * 100)+ '%';
+        if(d.marketCap !== null)
         d.marketCapFormatted = this.abbreviateNumber(d.marketCap);
         return d;
       });

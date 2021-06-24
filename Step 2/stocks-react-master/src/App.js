@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div id="app-container">
         <SiteHeader>
-          <h3>Stock Dashboard</h3>
+          <h3>Stock Dashboard Verion 2</h3>
         </SiteHeader>
         <SiteContent>
           <StockDashboard>

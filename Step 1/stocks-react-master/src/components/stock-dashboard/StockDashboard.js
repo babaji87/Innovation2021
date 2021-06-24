@@ -79,7 +79,7 @@ class StockDashboard extends Component {
   }
 
   componentDidMount() {
-    const interval = 3000;
+    const interval = 30000;
     const timer$ = timer(interval, interval)
     this.timerSubs = timer$
       .subscribe(() =>
