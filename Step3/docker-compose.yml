@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+   frontend2:
+     stdin_open: true
+     container_name: app2
+     image: 'anjnadockerid1/stocksserverfrontend:v2'
+     build:
+       dockerfile: Dockerfile
+       context: ./stocks-react-master
+     ports:
+       - "3000:3000"
+     depends_on:
+       - backend2
+   backend2:
+     container_name: backend2
+     image: 'anjnadockerid1/stocksserverbackend:v2'
+     build:
+       dockerfile: Dockerfile
+       context: ./stocks-master
+     ports:
+       - "8700:8700"
+   worker2:
+    container_name: worker2
+    image: 'anjnadockerid1/stocksserverworker:v2'
+    build: 
+      dockerfile: Dockerfile
+      context: ./stocks-worker
+    ports:
+      - "8084:8084"
+   
