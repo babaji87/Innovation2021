@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: worker33
+  template:
+    metadata:
+      labels:
+        component: worker33
+    spec:
+      containers:
+        - name: worker33
+          image: anjnadockerid1/hackathonworker:v33
+          ports:
+            - containerPort: 8084
+          env:
+          - name: PGUSER
+            value: postgres
+          - name: PGHOST
+            value: postgres-cluster-ip-service
+          - name: PGPORT
+            value: '5432'
+          - name: PGDATABASE
+            value: mydb
+          - name: PGPASSWORD
+            value: password

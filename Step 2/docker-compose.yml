@@ -1,35 +1,41 @@
 version: '3.3'
 
 services:
-   frontend:
+   frontend22:
      stdin_open: true
-     container_name: app
-     image: 'sample:hackathonfrontend'
+     container_name: app2
+     image: 'anjnadockerid1/hackathonfrontend:v22'
      build:
        dockerfile: Dockerfile
        context: ./stocks-react-master
      ports:
-       - "3001:3001"
+       - "3000:3000"
      depends_on:
-       - backend
-   backend:
-     container_name: backend
-     image: 'sample:hackathonbackend'
+       - backend22
+   backend22:
+     container_name: backend22
+     image: 'anjnadockerid1/hackathonbackend:v22'
      build:
        dockerfile: Dockerfile
        context: ./stocks-master
      ports:
-       - "8090:8090"
+       - "8700:8700"
      depends_on:
-       - worker
-   worker:
-    container_name: worker
-    image: 'sample:hackathonworker'
+       - dbpostgresql
+   worker22:
+    container_name: worker22
+    image: 'anjnadockerid1/hackathonworker:v22'
     build: 
       dockerfile: Dockerfile
       context: ./stocks-worker
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=password
+      - PGPORT=5432
     ports:
-      - "8095:8095"
+      - "8084:8084"
     depends_on:
       - dbpostgresql
    dbpostgresql:
@@ -39,4 +45,4 @@ services:
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=mydb
+      - POSTGRES_DB=postgres

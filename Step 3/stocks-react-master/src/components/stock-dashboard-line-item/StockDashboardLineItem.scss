@@ -1,0 +1,36 @@
+@import '../../variables.scss';
+
+li.stock-line-item {
+    font-family: 'Unica One', 'Serif';
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    flex-basis: 100px;
+    padding: 10px 15px 10px 10px;
+    border-bottom: dotted 1px $border-light-color;
+    justify-content: space-between;
+
+    .diff {
+        margin-left: 10px;
+    }
+    span {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    button.mini.basic {
+        margin-left: 10px;
+        min-width: 70px;
+        border-radius: 1rem;
+    }
+
+    i.toggle-remove {
+        margin-left: 5px;
+        font-size: 20px;
+    }
+
+    .arrow {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+}

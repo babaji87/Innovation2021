@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: server33
+  template:
+    metadata:
+      labels:
+        component: server33
+    spec:
+      containers:
+        - name: server33
+          image: anjnadockerid1/hackathonbackend:v33
+          ports:
+            - containerPort: 8096

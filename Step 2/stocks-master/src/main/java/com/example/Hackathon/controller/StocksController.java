@@ -29,7 +29,7 @@ import java.util.List;
 @RequestMapping(value = "/api/v1")
 public class StocksController {
 	@Autowired
-	@CrossOrigin(origins = "http://localhost:3001")
+	@CrossOrigin("*")
 	@GetMapping("/stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
@@ -51,7 +51,7 @@ public class StocksController {
 
 			StringBuilder result = new StringBuilder();
 			String line = "";
-			HttpPost httpPost = new HttpPost("http://localhost:8095/api/v1/");
+			HttpPost httpPost = new HttpPost("http://localhost:8084/api/v1/");
 			httpPost.setHeader("Content-type", "application/json");
 
 			while ((line = rd.readLine()) != null) {
@@ -73,7 +73,7 @@ public class StocksController {
 		return ResponseEntity.ok()
 				.body(stockList.toString());
 	}
-	@CrossOrigin(origins = "http://localhost:3001")
+	@CrossOrigin("*")
 	@GetMapping("/all-stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
@@ -98,7 +98,7 @@ public class StocksController {
 				.body(result.toString());
 	}
 
-	@CrossOrigin(origins = "http://localhost:3001")
+	@CrossOrigin("*")
 	@GetMapping("/all-stocks-data")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
 	public ResponseEntity<String> fetchAllStocksData() throws IOException {

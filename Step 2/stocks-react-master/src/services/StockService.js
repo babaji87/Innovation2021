@@ -51,10 +51,9 @@ class StockService {
   getStocks(symbols) {
     axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
     axios.defaults.headers.get['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS';
-    axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token';
-    
-    return axios
-    .get(`http://localhost:8090/api/v1/stocks`)
+    axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token, X-Requested-With, Content-Type, Accept';
+     return axios
+    .get(`http://localhost:8700/api/v1/stocks`)
     .then(results => {
       console.log(results);
       return results.data.map(d => {
@@ -74,7 +73,8 @@ class StockService {
    */
   getAllSymbols() {
     axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-    return axios.get(`http://localhost:8090/transformers/all-stocks`)
+    axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Origin, Content-Type, X-Auth-Token,X-Requested-With, Content-Type, Accept';
+    return axios.get(`http://localhost:8700/transformers/all-stocks`)
                 .then(results => {
                     return results.data;
                 });

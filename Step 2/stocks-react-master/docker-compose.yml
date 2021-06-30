@@ -1,37 +1,37 @@
-#version: '2'
-#
-#services:
-#  app:
-#    image: 'sample:hackathonbackend1'
-#    build:
-#      context: .
-#    container_name: app
-#    depends_on:
-#      - db
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-#      - SPRING_DATASOURCE_USERNAME=compose-postgres
-#      - SPRING_DATASOURCE_PASSWORD=compose-postgres
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-#
-#  db:
-#    image: 'postgres:13.1-alpine'
-#    container_name: db
-#    environment:
-#      - POSTGRES_USER=compose-postgres
-#      - POSTGRES_PASSWORD=compose-postgres
-
-version: '3.1'
+version: '3.3'
 services:
-  app:
-    container_name: app
-    image: 'sample:hackathonbackend2'
-    build: ./
+   frontend:
+     stdin_open: true
+     container_name: app
+     image: 'anjnadockerid1/hackathonfrontend:v2'
+     build:
+       dockerfile: Dockerfile
+       context: ./stocks-react-master
+     ports:
+       - "3002:3002"
+     depends_on:
+       - backend
+   backend:
+     container_name: backend
+     image: 'anjnadockerid1/hackathonbackend:v2'
+     build:
+       dockerfile: Dockerfile
+       context: ./stocks-master
+     ports:
+       - "8096:8096"
+     depends_on:
+       - worker
+   worker:
+    container_name: worker
+    image: 'anjnadockerid1/hackathonworker:v2'
+    build: 
+      dockerfile: Dockerfile
+      context: ./stocks-worker
     ports:
-      - "8083:8083"
+      - "8097:8097"
     depends_on:
       - dbpostgresql
-  dbpostgresql:
+   dbpostgresql:
     image: postgres
     ports:
       - "5432:5432"
