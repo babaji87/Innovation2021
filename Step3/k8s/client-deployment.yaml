@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: client33
-          image: anjnadockerid1/hackathonfrontend:v33
+          image: anjnadockerid1/hackathonfrontend:v2
           ports:
             - containerPort: 3000

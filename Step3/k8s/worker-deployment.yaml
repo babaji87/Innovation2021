@@ -6,25 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: worker33
+      component: worker3
   template:
     metadata:
       labels:
-        component: worker33
+        component: worker3
     spec:
       containers:
-        - name: worker33
-          image: anjnadockerid1/hackathonworker:v33
-          ports:
-            - containerPort: 8084
-          env:
-          - name: PGUSER
-            value: postgres
-          - name: PGHOST
-            value: postgres-cluster-ip-service
-          - name: PGPORT
-            value: '5432'
-          - name: PGDATABASE
-            value: mydb
-          - name: PGPASSWORD
-            value: password
+        - name: worker3
+          image: anjnadockerid1/hackathonworker:v3
+
+       
