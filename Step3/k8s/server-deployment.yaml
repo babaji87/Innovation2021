@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: server3
-          image: anjnaacr.azurecr.io/stocksserverbackend
+          image: anjnaacr.azurecr.io/stocksserverbackend:v2
           ports:
             - containerPort: 8096
