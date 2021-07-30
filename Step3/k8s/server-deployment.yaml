@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: server3
-          image: anjnadockerid1/hackathonbackend:v2
+          image: anjnaacr.azurecr.io/stocksserverbackend
           ports:
             - containerPort: 8096
