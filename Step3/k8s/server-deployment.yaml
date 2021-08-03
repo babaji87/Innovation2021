@@ -17,3 +17,5 @@ spec:
           image: anjnaacr.azurecr.io/stocksserverbackend:v2
           ports:
             - containerPort: 8096
+      restartPolicy: Always
+      
