@@ -17,3 +17,4 @@ spec:
           image: anjnaacr.azurecr.io/stocksserverfrontend:v2
           ports:
             - containerPort: 3000
+      retryPolicy: Always
