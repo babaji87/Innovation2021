@@ -16,5 +16,5 @@ spec:
         - name: client33
           image: anjnaacr.azurecr.io/stocksserverfrontend:v2
           ports:
-            - containerPort: 3000
+            - containerPort: 80
       restartPolicy: Always
