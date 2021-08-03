@@ -9,7 +9,7 @@ services:
        dockerfile: Dockerfile
        context: ./stocks-react-master
      ports:
-       - "3000:3000"
+       - "3000:80"
      depends_on:
        - backend2
    backend2:
