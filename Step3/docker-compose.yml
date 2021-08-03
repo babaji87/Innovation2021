@@ -4,7 +4,7 @@ services:
    frontend2:
      stdin_open: true
      container_name: app2
-     image: 'anjnadockerid1/stocksserverfrontend:v2'
+     image: 'anjnadockerid1/stocksserverfrontend:v3'
      build:
        dockerfile: Dockerfile
        context: ./stocks-react-master
@@ -14,7 +14,7 @@ services:
        - backend2
    backend2:
      container_name: backend2
-     image: 'anjnadockerid1/stocksserverbackend:v2'
+     image: 'anjnadockerid1/stocksserverbackend:v3'
      build:
        dockerfile: Dockerfile
        context: ./stocks-master
@@ -22,7 +22,7 @@ services:
        - "8700:8700"
    worker2:
     container_name: worker2
-    image: 'anjnadockerid1/stocksserverworker:v2'
+    image: 'anjnadockerid1/stocksserverworker:v3'
     build: 
       dockerfile: Dockerfile
       context: ./stocks-worker
