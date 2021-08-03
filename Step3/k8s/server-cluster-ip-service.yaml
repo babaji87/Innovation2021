@@ -4,7 +4,7 @@ metadata:
   name: server-cluster-ip-service
 spec:
   type: ClusterIP
-  clusterIP: 10.0.113:249
+  clusterIP: 10.0.113.249
   selector:
     component: server3
   ports:
