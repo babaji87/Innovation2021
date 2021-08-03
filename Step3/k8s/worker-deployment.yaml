@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: worker3
-          image: anjnaacr.azurecr.io/stocksserverworker:v2
+          image: anjnaacr.azurecr.io/stocksserverworker:v3
 
        
