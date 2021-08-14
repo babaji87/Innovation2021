@@ -2,7 +2,7 @@ wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca
 tar -xvzf openjdk-13.0.2_linux-x64_bin.tar.gz 
 sudo mv jdk-13.0.2/ /opt
 JAVA_HOME=/opt/jdk-13.0.2
-PATH=$PATH:/$JAVA_HOME/bin
+PATH=$PATH:$JAVA_HOME/bin
 export PATH
 echo "########################## "
 echo -e  "Install Maven"
@@ -11,7 +11,7 @@ wget https://apache.osuosl.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-b
 tar -xvzf apache-maven-3.8.1-bin.tar.gz
 sudo mv apache-maven-3.8.1 /opt
 M2_HOME=/opt/apache-maven-3.8.1
-PATH=$PATH:/$M2_HOME/bin
+PATH=$PATH:$M2_HOME/bin
 export PATH
 echo "########################## "
 echo -e "Install NodeJS"
