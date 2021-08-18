@@ -37,7 +37,7 @@ public class StocksController {
 	public ResponseEntity<String> fetchStocks() throws IOException {
 		List stockList = new ArrayList();
 		List<StockDetails> allStocks= getAllStocks();
-		int count =10;
+		int count =100;
 		for(StockDetails stock: allStocks){
 			count--;
 			HttpClient client = HttpClientBuilder.create().build();
