@@ -30,7 +30,7 @@ import java.util.List;
 public class StocksController {
 	@Autowired
 	private StocksDataRepository stocksDataRepository;
-	@CrossOrigin(origins = "http:\\10.1.207.97:3000")
+	@CrossOrigin(origins = "http://10.1.207.97:3000")
 	@GetMapping("/stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
