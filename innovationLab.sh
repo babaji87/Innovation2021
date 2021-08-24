@@ -1,5 +1,5 @@
-wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz 
-tar -xvzf openjdk-13.0.2_linux-x64_bin.tar.gz 
+sudo wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz 
+sudo tar -xvzf openjdk-13.0.2_linux-x64_bin.tar.gz 
 sudo mv jdk-13.0.2/ /opt
 JAVA_HOME=/opt/jdk-13.0.2
 PATH=$PATH:$JAVA_HOME/bin
