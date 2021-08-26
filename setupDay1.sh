@@ -8,7 +8,7 @@ RESOURCE_GROUP="default"
 
 AKS_CLUSTER_NAME="anjnaaks"
 
-AKS_VNET_SUBNET="default-4"
+AKS_VNET_SUBNET="default-3"
 
 ACR_REG_NAME="anjnaacr"
 ACR_REG_NEW_NAME="anjnaacr1"
@@ -35,19 +35,19 @@ echo -e  " Create Container Registry "
 echo "######################### "
 
 az acr create --resource-group $RESOURCE_GROUP \
-  --name $ACR_REG_NAME --sku Basic
+  --name $ACR_REG_NEW_NAME --sku Basic
   echo "########################## "
 echo -e  " Create docker images and push them to ACR "
 echo "######################### "
 sudo docker-compose up --no-start
-sudo docker tag anjnadockerid1/stocksserverfrontend:v3 $ACR_REG_NAME.azurecr.io/stocksserverfrontend:v3
-sudo docker tag anjnadockerid1/stocksserverbackend:v3 $ACR_REG_NAME.azurecr.io/stocksserverbackend:v3
-sudo docker tag anjnadockerid1/stocksserverworker:v3 $ACR_REG_NAME.azurecr.io/stocksserverworker:v3
-sudo az acr login --name $ACR_REG_NAME
-sudo docker push $ACR_REG_NAME.azurecr.io/stocksserverfrontend:v3
-sudo docker push $ACR_REG_NAME.azurecr.io/stocksserverbackend:v3
-sudo docker push $ACR_REG_NAME.azurecr.io/stocksserverworker:v3
-sudo az acr repository list --name  $ACR_REG_NAME --output table
+sudo docker tag anjnadockerid1/stocksserverfrontend:v3 $ACR_REG_NEW_NAME.azurecr.io/stocksserverfrontend:v3
+sudo docker tag anjnadockerid1/stocksserverbackend:v3 $ACR_REG_NEW_NAME.azurecr.io/stocksserverbackend:v3
+sudo docker tag anjnadockerid1/stocksserverworker:v3 $ACR_REG_NEW_NAME.azurecr.io/stocksserverworker:v3
+sudo az acr login --name $ACR_REG_NEW_NAME
+sudo docker push $ACR_REG_NEW_NAME.azurecr.io/stocksserverfrontend:v3
+sudo docker push $ACR_REG_NEW_NAME.azurecr.io/stocksserverbackend:v3
+sudo docker push $ACR_REG_NEW_NAME.azurecr.io/stocksserverworker:v3
+sudo az acr repository list --name  $ACR_REG_NEW_NAME --output table
 echo "########################## "
 echo -e  " Create AKS"
 echo "######################### "
@@ -58,7 +58,7 @@ sudo az aks create --subscription $SUBSCRIPTION --resource-group $RESOURCE_GROUP
 SP_ID=$(az resource list --subscription $SUBSCRIPTION --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME --query [*].identity.principalId -o tsv)
 sudo az role assignment create --assignee $SP_ID --role "Contributor" --scope /subscriptions/$SUBSCRIPTION/resourceGroups/infrastructure
 sudo az aks get-credentials --subscription $SUBSCRIPTION --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME
-sudo az aks update -n $AKS_CLUSTER_NAME -g $RESOURCE_GROUP --attach-acr $ACR_REG_NAME
+sudo az aks update -n $AKS_CLUSTER_NAME -g $RESOURCE_GROUP --attach-acr $ACR_REG_NEW_NAME
 echo "########################## "
 echo -e  " Creation complete "
 echo "######################### "
