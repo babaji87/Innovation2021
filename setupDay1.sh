@@ -3,29 +3,24 @@ echo -e  " Set Shell variables"
 echo "######################### "
 
 SUBSCRIPTION="e247041b-0729-4095-9488-564fbc84a3b7"
-
 RESOURCE_GROUP="default"
-
 AKS_CLUSTER_NAME="anjnaaks"
-
 AKS_VNET_SUBNET="default-3"
-
 ACR_REG_NAME="anjnaacr"
 ACR_REG_NEW_NAME="anjnaacr1"
-
-AZ_POSTGRESQL_NAME="anjnapostgres"
-
+POSTGRES_USER_NAME="anjna1k"
 AKS_ROUTE_TABLE="anjna_aks_route_table"
 
 echo "########################## "
 echo -e  " Create Postgres Server"
 echo "######################### "
 
-az postgres server create --resource-group $RESOURCE_GROUP  --name $AZ_POSTGRESQL_NAME --ssl-enforcement Disabled   --location eastus --admin-user anjnak --admin-password  Postgres1 --sku-name GP_Gen5_2
+sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_NEW_DB --ssl-enforcement Disabled \
+    --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_NEW_PASSWD --sku-name GP_Gen5_2
 sudo az postgres server firewall-rule create \
     --subscription $SUBSCRIPTION \
     --resource-group $RESOURCE_GROUP \
-    --server $AZ_POSTGRESQL_NAME \
+    --server $POSTGRES_NEW_DB \
     --name AllowMyIP \
     --start-ip-address 0.0.0.0 \
     --end-ip-address 255.255.255.255
