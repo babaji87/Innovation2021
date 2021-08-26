@@ -66,5 +66,5 @@ sudo kubectl get nodes
 sudo az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME
 sudo kubectl get nodes
 cd Step3
-find . -type f -name "*.yaml" -print0 | xargs -0 sed -i '' -e 's/$ACR_REG_NAME/$ACR_REG_NEW_NAME/g'
+egrep -lRZ $ACR_REG_NAME | xargs -0 -l sed -i -e s/$ACR_REG_NAME/$ACR_REG_NEW_NAME/g
 sudo kubectl apply -f k8s
