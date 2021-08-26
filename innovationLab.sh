@@ -67,9 +67,9 @@ export POSTGRES_NEW_PASSWD="Postgres2"
 cd Step3
 egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
 egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
-egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
 egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
+egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 cd stocks-master
 mvn install
 cd ..
