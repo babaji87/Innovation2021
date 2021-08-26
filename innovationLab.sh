@@ -1,7 +1,22 @@
 echo "########################## "
 echo -e  " Build demo project"
 echo "######################### "
+CLIENT_ORIG_IP="10.1.207.97"
+CLIENT_NEW_IP="10.1.206.98"
+SERVER_ORIG_IP="10.1.208.97"
+SERVER_NEW_IP="10.1.208.98"
+POSTGRES_ORIG_DB="anjnapostgres"
+POSTGRES_NEW_DB="anjna1postgres"
+POSTGRES_ORIG_USER="anjnak@anjnapostgres"
+POSTGRES_NEW_USER="anjna1k@anjnapostgres"
+POSTGRES_ORIG_PASSWD="Postgres1"
+POSTGRES_NEW_PASSWD="Postgres2"
 cd Step3
+find . -type f -name "*.*" -print0 | xargs -0 sed -i '' -e 's/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g'
+find . -type f -name "*.*" -print0 | xargs -0 sed -i '' -e 's/$SERVER_ORIG_IP/$SERVER_NEW_IP/g'
+find . -type f -name "*.*" -print0 | xargs -0 sed -i '' -e 's/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g'
+find . -type f -name "*.*" -print0 | xargs -0 sed -i '' -e 's/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g'
+find . -type f -name "*.*" -print0 | xargs -0 sed -i '' -e 's/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g'
 cd stocks-master
 mvn install
 cd ..
