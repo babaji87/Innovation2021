@@ -11,6 +11,7 @@ AKS_CLUSTER_NAME="anjnaaks"
 AKS_VNET_SUBNET="default-4"
 
 ACR_REG_NAME="anjnaacr"
+ACR_REG_NEW_NAME="anjnaacr1"
 
 AZ_POSTGRESQL_NAME="anjnapostgres"
 
@@ -65,4 +66,5 @@ sudo kubectl get nodes
 sudo az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME
 sudo kubectl get nodes
 cd Step3
+find . -type f -name "*.yaml" -print0 | xargs -0 sed -i '' -e 's/$ACR_REG_NAME/$ACR_REG_NEW_NAME/g'
 sudo kubectl apply -f k8s
