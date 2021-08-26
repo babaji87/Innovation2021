@@ -1,32 +1,4 @@
 echo "########################## "
-echo -e  " Build demo project"
-echo "######################### "
-CLIENT_ORIG_IP="10.1.207.97"
-CLIENT_NEW_IP="10.1.206.98"
-SERVER_ORIG_IP="10.1.208.97"
-SERVER_NEW_IP="10.1.208.98"
-POSTGRES_ORIG_DB="anjnapostgres"
-POSTGRES_NEW_DB="anjna1postgres"
-POSTGRES_ORIG_USER="anjnak@anjnapostgres"
-POSTGRES_NEW_USER="anjna1k@anjnapostgres"
-POSTGRES_ORIG_PASSWD="Postgres1"
-POSTGRES_NEW_PASSWD="Postgres2"
-cd Step3
-egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
-egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
-egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
-egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
-egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
-cd stocks-master
-mvn install
-cd ..
-cd stocks-react-master
-npm install
-cd ..
-cd stocks-worker
-mvn install
-cd ..
-echo "########################## "
 echo -e  " Install Java "
 echo "######################### "
 sudo wget https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz
@@ -79,6 +51,34 @@ echo "############################"
 sudo chmod 777 /etc/yum.repos.d
 cp kubernetes.repo /etc/yum.repos.d
 sudo yum install -y kubectl
+echo "########################## "
+echo -e  " Build demo project"
+echo "######################### "
+export CLIENT_ORIG_IP="10.1.207.97"
+export CLIENT_NEW_IP="10.1.206.97"
+export SERVER_ORIG_IP="10.1.207.98"
+export SERVER_NEW_IP="10.1.206.98"
+export POSTGRES_ORIG_DB="anjnapostgres"
+export POSTGRES_NEW_DB="anjna1postgres"
+export POSTGRES_ORIG_USER="anjnak@anjnapostgres"
+export POSTGRES_NEW_USER="anjna1k@anjnapostgres"
+export POSTGRES_ORIG_PASSWD="Postgres1"
+export POSTGRES_NEW_PASSWD="Postgres2"
+cd Step3
+egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
+egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
+egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
+egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
+egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
+cd stocks-master
+mvn install
+cd ..
+cd stocks-react-master
+npm install
+cd ..
+cd stocks-worker
+mvn install
+cd ..
 echo "############################"
 echo -e "COMPLETE SETUP"
 
