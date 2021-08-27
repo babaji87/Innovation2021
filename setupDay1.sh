@@ -29,7 +29,7 @@ echo "########################## "
 echo -e  " Create Container Registry "
 echo "######################### "
 
-az acr create --resource-group $RESOURCE_GROUP \
+sudo az acr create --resource-group $RESOURCE_GROUP \
   --name $ACR_REG_NEW_NAME --sku Basic
   echo "########################## "
 echo -e  " Create docker images and push them to ACR "
