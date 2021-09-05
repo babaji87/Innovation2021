@@ -30,14 +30,14 @@ import java.util.List;
 public class StocksController {
 	@Autowired
 	private StocksDataRepository stocksDataRepository;
-	@CrossOrigin(origins = "10.1.207.97:3000")
+	@CrossOrigin(origins = "http://10.1.207.97:3000")
 	@GetMapping("/stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
 	public ResponseEntity<String> fetchStocks() throws IOException {
 		List stockList = new ArrayList();
 		List<StockDetails> allStocks= getAllStocks();
-		int count =10;
+		int count =100;
 		for(StockDetails stock: allStocks){
 			count--;
 			HttpClient client = HttpClientBuilder.create().build();
@@ -73,7 +73,7 @@ public class StocksController {
 		return ResponseEntity.ok()
 				.body(stockList.toString());
 	}
-	@CrossOrigin(origins = "10.1.207.97:3000")
+	@CrossOrigin(origins = "http://10.1.207.97:3000")
 	@GetMapping("/all-stocks")
 	@ApiOperation("Let the battle begin!!!! Go Go Go!!!")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
@@ -98,14 +98,14 @@ public class StocksController {
 				.body(result.toString());
 	}
 
-	@CrossOrigin(origins = "10.1.207.97:3000")
+	@CrossOrigin(origins = "http://10.1.207.97:3000")
 	@GetMapping("/all-stocks-data")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
 	public ResponseEntity<String> fetchAllStocksData() throws IOException {
 		return ResponseEntity.ok()
 				.body("");
 	}
-	@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://10.1.207.97:3000")
 	@GetMapping("/max-stock-value")
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
 	public ResponseEntity<String> fetchAllStocksData(@RequestParam("symbol") String symbol) throws IOException {
