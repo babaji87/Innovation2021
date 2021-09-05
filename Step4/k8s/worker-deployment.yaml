@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      component: worker3
+  template:
+    metadata:
+      labels:
+        component: worker3
+    spec:
+      containers:
+        - name: worker3
+          image: anjnaacr.azurecr.io/stocksserverworker:v3
+
+       

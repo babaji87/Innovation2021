@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+	   http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc-2.0.xsd
+	   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+    <context:component-scan
+            base-package="com.example.worker" />
+
+    <int:channel id="fromdb">
+        <int:queue />
+    </int:channel>
+    <int:poller default="true" fixed-rate="500" />
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://anjnapostgres.postgres.database.azure.com:5432/postgres" />
+        <property name="username" value="anjnak@anjnapostgres" />
+        <property name="password" value="Postgres1" />
+    </bean>
+    <int:service-activator input-channel="fromdb"
+                           ref="jdbcMessageHandler" />
+    <int-jdbc:inbound-channel-adapter
+            channel="fromdb" data-source="dataSource" query="SELECT * FROM stocksdata">
+        <int:poller fixed-delay="4000" />
+    </int-jdbc:inbound-channel-adapter>
+
+</beans>

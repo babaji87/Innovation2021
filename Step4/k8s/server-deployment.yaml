@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server3
+  template:
+    metadata:
+      labels:
+        component: server3
+    spec:
+      containers:
+        - name: server3
+          image: anjnaacr.azurecr.io/stocksserverbackend:v3
+          ports:
+            - containerPort: 8096
+      restartPolicy: Always
+      
