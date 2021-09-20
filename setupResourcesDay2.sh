@@ -1,27 +1,27 @@
 echo "########################## "
 echo -e  " Set Shell variables"
 echo "######################### "
-VERSION1 = 4
+VERSION=4
 SUBSCRIPTION="e247041b-0729-4095-9488-564fbc84a3b7"
 RESOURCE_GROUP="default"
-AKS_CLUSTER_NAME="anjnaaks"+$VERSION1
-AKS_VNET_SUBNET="default-"+$VERSION1
-ACR_REG_NAME="anjnaacr"+$VERSION1
-POSTGRES_USER_NAME="anjna"+$VERSION1
-AKS_ROUTE_TABLE="anjna_aks_route_table"+$VERSION1
-POSTGRES_DB=anjnapostgres+$VERSION1
-LOCATION1 = "eastus"
-SKU1 ="Basic"
-SERVICEBUSNAME= "anjnasb"+$VERSION1
-SERVICEBUSQUEUE= "anjnaq"+$VERSION1
-KEYVAULTNAME="anjnakv"+$VERSION1
-POSTGRES_PASSWD="Postgres"+$VERSION1
-SERVICE_PRINCIPAL="anjnasp"+$VERSION1
+AKS_CLUSTER_NAME="anjnaaks"$VERSION
+AKS_VNET_SUBNET="default-"$VERSION
+ACR_REG_NAME="anjnaacr"$VERSION
+POSTGRES_USER_NAME="anjna"$VERSION
+AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
+POSTGRES_DB=anjnapostgres$VERSION
+LOCATION="eastus"
+SKU="Basic"
+SERVICEBUSNAME="anjnasb"$VERSION
+SERVICEBUSQUEUE="anjnaq"$VERSION
+KEYVAULTNAME="anjnakv"$VERSION
+POSTGRES_PASSWD="Postgres"$VERSION
+SERVICE_PRINCIPAL="anjnasp"$VERSION
 SP_TENANT_ID="8d09f28d-2b54-4761-98f1-de38762cd939"
 echo "########################## "
 echo -e  " Create Postgres Server"
 echo "######################### "
-
+sudo az account set -s $SUBSCRIPTION
 sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_DB --ssl-enforcement Disabled \
     --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2
 sudo az postgres server firewall-rule create \
@@ -37,7 +37,7 @@ echo -e  " Create Container Registry "
 echo "######################### "
 
 sudo az acr create --resource-group $RESOURCE_GROUP \
-  --name $POSTGRES_USER_NAME --sku Basic
+  --name $ACR_REG_NAME --sku $SKU
  
  echo "########################## "
  echo -e "creating the keyvault to store and retrieve secrets in our apps"
@@ -52,7 +52,7 @@ sudo az keyvault create \
     --enabled-for-deployment true \
     --enabled-for-disk-encryption true \
     --enabled-for-template-deployment true \
-    --location $LOCATION1 \
+    --location $LOCATION \
     --query properties.vaultUri \
     --sku standard
 
