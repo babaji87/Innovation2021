@@ -1,22 +1,22 @@
 echo "########################## "
 echo -e  " Set Shell variables"
 echo "######################### "
-VERSION = 4
+VERSION1 = 4
 SUBSCRIPTION="e247041b-0729-4095-9488-564fbc84a3b7"
 RESOURCE_GROUP="default"
-AKS_CLUSTER_NAME="anjnaaks"+$VERSION
-AKS_VNET_SUBNET="default-"+$VERSION
-ACR_REG_NAME="anjnaacr"+$VERSION
-POSTGRES_USER_NAME="anjna"+$VERSION
-AKS_ROUTE_TABLE="anjna_aks_route_table"+$VERSION
-POSTGRES_DB=anjnapostgres+$VERSION
-LOCATION = "eastus"
-SKU ="Basic"
-SERVICEBUSNAME= "anjnasb"+$VERSION
-SERVICEBUSQUEUE= "anjnaq"+$VERSION
-KEYVAULTNAME="anjnakv"+$VERSION
-POSTGRES_PASSWD="Postgres"+$VERSION
-SERVICE_PRINCIPAL="anjnasp"+$VERSION
+AKS_CLUSTER_NAME="anjnaaks"+$VERSION1
+AKS_VNET_SUBNET="default-"+$VERSION1
+ACR_REG_NAME="anjnaacr"+$VERSION1
+POSTGRES_USER_NAME="anjna"+$VERSION1
+AKS_ROUTE_TABLE="anjna_aks_route_table"+$VERSION1
+POSTGRES_DB=anjnapostgres+$VERSION1
+LOCATION1 = "eastus"
+SKU1 ="Basic"
+SERVICEBUSNAME= "anjnasb"+$VERSION1
+SERVICEBUSQUEUE= "anjnaq"+$VERSION1
+KEYVAULTNAME="anjnakv"+$VERSION1
+POSTGRES_PASSWD="Postgres"+$VERSION1
+SERVICE_PRINCIPAL="anjnasp"+$VERSION1
 SP_TENANT_ID="8d09f28d-2b54-4761-98f1-de38762cd939"
 echo "########################## "
 echo -e  " Create Postgres Server"
@@ -52,7 +52,7 @@ sudo az keyvault create \
     --enabled-for-deployment true \
     --enabled-for-disk-encryption true \
     --enabled-for-template-deployment true \
-    --location $LOCATION \
+    --location $LOCATION1 \
     --query properties.vaultUri \
     --sku standard
 
