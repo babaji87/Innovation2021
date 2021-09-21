@@ -7,7 +7,7 @@ RESOURCE_GROUP="default"
 AKS_CLUSTER_NAME="anjnaaks"$VERSION
 AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"$VERSION
-POSTGRES_USER_NAME="anjna"$VERSION
+POSTGRES_USER_NAME="anjnak"$VERSION
 AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
 POSTGRES_DB=anjnapostgres$VERSION
 LOCATION="eastus"
@@ -57,10 +57,15 @@ sudo az keyvault create \
     --sku standard
 
 sudo az keyvault set-policy --name $KEYVAULTNAME --spn $SP_NAME --secret-permissions get list
-sudo az keyvault secret set --name "connectionString" \
+sudo az keyvault secret set --name "spring-datasource-url" \
     --vault-name $KEYVAULTNAME \
-    --value "jdbc:sqlserver://SERVER.database.windows.net:1433;database=DATABASE;"
-
+    --value "jdbc:postgresql://anjnapostgres"$VERION".postgres.database.azure.com:5432/postgres"
+sudo az keyvault secret set --name "spring-datasource-username" \
+    --vault-name $KEYVAULTNAME \
+    --value "anjnak"$VERSION"anjnapostgres"$VERSION
+sudo az keyvault secret set --name "spring-datasource-password" \
+    --vault-name $KEYVAULTNAME \
+    --value "Postgres"$VERSION
 
 echo "########################## "
 echo -e "Creating service bus and queue for messaging"
@@ -70,8 +75,13 @@ echo "########################## "
 # every identifier identifies a dist
 #every namespace=> for a unique app
 sudo az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICEBUSNAME --location $LOCATION
-
+SBCONNSTRING=$(sudo sz servicebus namespace authorization-rule keys list --resource-group $RESOURCE_GROUP --namespace-name $SERVICEBUSNAME --name RootManageSharedAccessKey --query primaryConnectionString -o tsv)
 #queue=>list of messages=>MQ
 #every queue has its own list of participants=> senders and receivers \
 #queue=> group chat thread on whatsapp
 sudo az servicebus queue create --resource-group $RESOURCE_GROUP --namespace-name $SERVICEBUSNAME --name $SERVICEBUSQUEUE
+echo -e "azure.keyvault.client-id="$SP_APPID
+echo -e "azure.keyvault.client-key="$SP_PASSWORD
+echo -e "azure.keyvault.tenant-id="$SP_TENANT_ID
+echo -e "azure.keyvault.uri= "https://"$KEYVAULTNAME".vault.azure.net/"
+echo -e "spring.jms.servicebus.connection-string="$SBCONNSTRING
