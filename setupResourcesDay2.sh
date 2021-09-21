@@ -56,7 +56,6 @@ sudo az keyvault create \
     --query properties.vaultUri \
     --sku standard
 
-sudo az keyvault set-policy --name $KEYVAULTNAME --spn $SP_NAME --secret-permissions get list
 sudo az keyvault secret set --name "spring-datasource-url" \
     --vault-name $KEYVAULTNAME \
     --value "jdbc:postgresql://anjnapostgres"$VERION".postgres.database.azure.com:5432/postgres"
