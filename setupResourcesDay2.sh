@@ -69,7 +69,7 @@ echo "########################## "
 #namespace is very similar to namespace in programming languages
 # every identifier identifies a dist
 #every namespace=> for a unique app
-sudo az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICEBUSNAME --location $Location
+sudo az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICEBUSNAME --location $LOCATION
 
 #queue=>list of messages=>MQ
 #every queue has its own list of participants=> senders and receivers \
