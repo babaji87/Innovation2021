@@ -74,7 +74,7 @@ echo "########################## "
 # every identifier identifies a dist
 #every namespace=> for a unique app
 sudo az servicebus namespace create --resource-group $RESOURCE_GROUP --name $SERVICEBUSNAME --location $LOCATION
-SBCONNSTRING=$(sudo sz servicebus namespace authorization-rule keys list --resource-group $RESOURCE_GROUP --namespace-name $SERVICEBUSNAME --name RootManageSharedAccessKey --query primaryConnectionString -o tsv)
+SBCONNSTRING=$(sudo az servicebus namespace authorization-rule keys list --resource-group $RESOURCE_GROUP --namespace-name $SERVICEBUSNAME --name RootManageSharedAccessKey --query primaryConnectionString -o tsv)
 #queue=>list of messages=>MQ
 #every queue has its own list of participants=> senders and receivers \
 #queue=> group chat thread on whatsapp
