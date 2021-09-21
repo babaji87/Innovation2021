@@ -1,37 +1,16 @@
 echo "########################## "
 echo -e  " Set Shell variables"
 echo "######################### "
-
+VERSION=4
 SUBSCRIPTION="e247041b-0729-4095-9488-564fbc84a3b7"
 RESOURCE_GROUP="default"
-AKS_CLUSTER_NAME="anjnaaks"
-AKS_VNET_SUBNET="default-3"
+AKS_CLUSTER_NAME="anjnaaks"$VERSION
+AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"
-ACR_REG_NEW_NAME="anjnaacr1"
-POSTGRES_USER_NAME="anjna1k"
-AKS_ROUTE_TABLE="anjna_aks_route_table"
+ACR_REG_NEW_NAME="anjnaacr"$VERSION
+AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
 
 echo "########################## "
-echo -e  " Create Postgres Server"
-echo "######################### "
-
-sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_NEW_DB --ssl-enforcement Disabled \
-    --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_NEW_PASSWD --sku-name GP_Gen5_2
-sudo az postgres server firewall-rule create \
-    --subscription $SUBSCRIPTION \
-    --resource-group $RESOURCE_GROUP \
-    --server $POSTGRES_NEW_DB \
-    --name AllowMyIP \
-    --start-ip-address 0.0.0.0 \
-    --end-ip-address 255.255.255.255
-    
-echo "########################## "
-echo -e  " Create Container Registry "
-echo "######################### "
-
-sudo az acr create --resource-group $RESOURCE_GROUP \
-  --name $ACR_REG_NEW_NAME --sku Basic
-  echo "########################## "
 echo -e  " Create docker images and push them to ACR "
 echo "######################### "
 sudo docker-compose up --no-start
