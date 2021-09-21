@@ -82,5 +82,5 @@ sudo az servicebus queue create --resource-group $RESOURCE_GROUP --namespace-nam
 echo -e "azure.keyvault.client-id="$SP_APPID
 echo -e "azure.keyvault.client-key="$SP_PASSWORD
 echo -e "azure.keyvault.tenant-id="$SP_TENANT_ID
-echo -e "azure.keyvault.uri= "https://"$KEYVAULTNAME".vault.azure.net/"
+echo -e "azure.keyvault.uri=https://"$KEYVAULTNAME".vault.azure.net/"
 echo -e "spring.jms.servicebus.connection-string="$SBCONNSTRING
