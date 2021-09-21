@@ -64,7 +64,7 @@ export POSTGRES_ORIG_USER="anjnak@anjnapostgres"
 export POSTGRES_NEW_USER="anjna1k@anjnapostgres"
 export POSTGRES_ORIG_PASSWD="Postgres1"
 export POSTGRES_NEW_PASSWD="Postgres2"
-cd Step3
+cd Step5
 egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
 egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
 egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
