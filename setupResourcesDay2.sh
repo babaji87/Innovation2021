@@ -25,9 +25,9 @@ CLIENT_ORIG_IP="10.1.207.97"
  POSTGRES_ORIG_DB="anjnapostgres"
  POSTGRES_NEW_DB="anjnapostgres"$VERSION
  POSTGRES_ORIG_USER="anjnak@anjnapostgres"
- POSTGRES_NEW_USER="anjnak"$VERSION@anjnapostgres"$VERSION
+ POSTGRES_NEW_USER="anjnak"$VERSION"@anjnapostgres"$VERSION
  POSTGRES_ORIG_PASSWD="Postgres1"
- POSTGRES_NEW_PASSWD="Postgres$VERSION"
+ POSTGRES_NEW_PASSWD="Postgres"$VERSION
 
 
 echo "########################## "
