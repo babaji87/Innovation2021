@@ -59,11 +59,11 @@ export CLIENT_NEW_IP="10.1.206.97"
 export SERVER_ORIG_IP="10.1.207.98"
 export SERVER_NEW_IP="10.1.206.98"
 export POSTGRES_ORIG_DB="anjnapostgres"
-export POSTGRES_NEW_DB="anjna1postgres"
+export POSTGRES_NEW_DB="anjnapostgres3"
 export POSTGRES_ORIG_USER="anjnak@anjnapostgres"
-export POSTGRES_NEW_USER="anjna1k@anjnapostgres"
+export POSTGRES_NEW_USER="anjnak3@anjnapostgres3"
 export POSTGRES_ORIG_PASSWD="Postgres1"
-export POSTGRES_NEW_PASSWD="Postgres2"
+export POSTGRES_NEW_PASSWD="Postgres3"
 cd Step5
 egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
 egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
