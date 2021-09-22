@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface StocksDataRepository extends JpaRepository<StocksData, Long> {
-  //  @Query("SELECT t FROM stocksdata where symbol= ?1")
-   // List<StocksData> findBySymbol(String stockName);
+    @Query("SELECT t FROM stocksdata where symbol= ?1")
+    List<StocksData> findBySymbol(String stockName);
 }
