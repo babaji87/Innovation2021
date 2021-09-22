@@ -28,6 +28,7 @@ CLIENT_ORIG_IP="10.1.207.97"
  POSTGRES_NEW_USER="anjnak"$VERSION"@anjnapostgres"$VERSION
  POSTGRES_ORIG_PASSWD="Postgres1"
  POSTGRES_NEW_PASSWD="Postgres"$VERSION
+ SC_OLDCONNECTION="Endpoint=sb://anjnasb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oS39J7eYXEUUOPe9Nz8zRX1hiNpkH4FmXYSe8Glr78Y="
 
 
 echo "########################## "
@@ -102,9 +103,9 @@ echo -e "spring.jms.servicebus.connection-string="$SBCONNSTRING
 egrep -lRZ "3243dffc-1cc3-42e6-89ad-9d7eeed1d23b" | xargs -0 -l sed -i -e s/"3243dffc-1cc3-42e6-89ad-9d7eeed1d23b"/$SP_APPID/g
 egrep -lRZ "S~GBcRDBuddGAFUPlj1Oj7YwH03drJ.0Ld" | xargs -0 -l sed -i -e s/"S~GBcRDBuddGAFUPlj1Oj7YwH03drJ.0Ld"/$SP_PASSWORD/g
 egrep -lRZ "https://contosokvakm.vault.azure.net/" | xargs -0 -l sed -i -e s+"https://contosokvakm.vault.azure.net/"+"https://"$KEYVAULTNAME".vault.azure.net/"+g
-egrep -lRZ "Endpoint=sb://anjnasb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oS39J7eYXEUUOPe9Nz8zRX1hiNpkH4FmXYSe8Glr78Y=" | xargs -0 -l sed -i -e 's+"Endpoint=sb://anjnasb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oS39J7eYXEUUOPe9Nz8zRX1hiNpkH4FmXYSe8Glr78Y="+$SBCONNSTRING+g'
+egrep -lRZ $SC_OLDCONNECTION | xargs -0 -l sed -i -e 's+$SC_OLDCONNECTION+$SBCONNSTRING+g'
 egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
-egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/gegrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
+egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/gegrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$/g
 egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
 egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
