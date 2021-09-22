@@ -18,20 +18,7 @@ KEYVAULTNAME="anjnakv"$VERSION
 POSTGRES_PASSWD="Postgres"$VERSION
 SERVICE_PRINCIPAL="anjnasp"$VERSION
 SP_TENANT_ID="8d09f28d-2b54-4761-98f1-de38762cd939"
-echo "########################## "
-echo -e  " Create Postgres Server"
-echo "######################### "
-sudo az account set -s $SUBSCRIPTION
-sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_DB --ssl-enforcement Disabled \
-    --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2
-sudo az postgres server firewall-rule create \
-    --subscription $SUBSCRIPTION \
-    --resource-group $RESOURCE_GROUP \
-    --server $POSTGRES_DB \
-    --name AllowMyIP \
-    --start-ip-address 0.0.0.0 \
-    --end-ip-address 255.255.255.255
-    
+
 echo "########################## "
 echo -e  " Create Container Registry "
 echo "######################### "
@@ -54,7 +41,9 @@ sudo az keyvault create \
     --enabled-for-template-deployment true \
     --location $LOCATION \
     --query properties.vaultUri \
-    --sku standard
+    --sku standard \
+    --enable-soft-delete true \
+    --enable-purge-protection true
 
 sudo az keyvault secret set --name "spring-datasource-url" \
     --vault-name $KEYVAULTNAME \
@@ -65,6 +54,21 @@ sudo az keyvault secret set --name "spring-datasource-username" \
 sudo az keyvault secret set --name "spring-datasource-password" \
     --vault-name $KEYVAULTNAME \
     --value "Postgres"$VERSION
+sudo az keyvault key create --name "demoKey" -p software --vault-name $KEYVAULTNAME
+
+echo "########################## "
+echo -e  " Create Postgres Server"
+echo "######################### "
+sudo az account set -s $SUBSCRIPTION
+sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_DB --ssl-enforcement Disabled \
+    --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2 --assign-identity  
+sudo az postgres server firewall-rule create \
+    --subscription $SUBSCRIPTION \
+    --resource-group $RESOURCE_GROUP \
+    --server $POSTGRES_DB \
+    --name AllowMyIP \
+    --start-ip-address 0.0.0.0 \
+    --end-ip-address 255.255.255.255
 
 echo "########################## "
 echo -e "Creating service bus and queue for messaging"
