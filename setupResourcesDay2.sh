@@ -55,7 +55,7 @@ sudo az keyvault secret set --name "spring-datasource-password" \
     --vault-name $KEYVAULTNAME \
     --value "Postgres"$VERSION
 sudo az keyvault key create --name "demoKey" -p software --vault-name $KEYVAULTNAME
-sudo az keyvault set-policy --name -g $RESOURCE_GROUP --key-permissions get unwrapKey wrapKey --object-id $POSTGRES_DB
+#sudo az keyvault set-policy --name -g $RESOURCE_GROUP --key-permissions get unwrapKey wrapKey --object-id $POSTGRES_DB
 echo "########################## "
 echo -e  " Create Postgres Server"
 echo "######################### "
