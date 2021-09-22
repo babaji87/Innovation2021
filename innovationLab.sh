@@ -54,20 +54,7 @@ sudo yum install -y kubectl
 echo "########################## "
 echo -e  " Build demo project"
 echo "######################### "
-export CLIENT_ORIG_IP="10.1.207.97"
-export CLIENT_NEW_IP="10.1.206.97"
-export SERVER_ORIG_IP="10.1.207.98"
-export SERVER_NEW_IP="10.1.206.98"
-export POSTGRES_ORIG_DB="anjnapostgres"
-export POSTGRES_NEW_DB="anjnapostgres3"
-export POSTGRES_ORIG_USER="anjnak@anjnapostgres"
-export POSTGRES_NEW_USER="anjnak3@anjnapostgres3"
-export POSTGRES_ORIG_PASSWD="Postgres1"
-export POSTGRES_NEW_PASSWD="Postgres3"
 cd Step4
-egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
-egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
-egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 cd stocks-master
 mvn install
 cd ..
@@ -79,11 +66,6 @@ mvn install
 cd ..
 cd ..
 cd Step5
-egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
-egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
-egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
-egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
-egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 cd stocks-master
 mvn install
 cd ..
