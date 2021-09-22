@@ -79,6 +79,7 @@ cd ..
 cd stocks-worker
 mvn install
 cd ..
+cd ..
 cd Step5
 egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
 egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
