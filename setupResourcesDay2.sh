@@ -60,14 +60,14 @@ sudo az keyvault create \
 
 sudo az keyvault secret set --name "spring-datasource-url" \
     --vault-name $KEYVAULTNAME \
-    --value "jdbc:postgresql://anjnapostgres"$VERION".postgres.database.azure.com:5432/postgres"
+    --value "jdbc:postgresql://anjnapostgres"$VERSION".postgres.database.azure.com:5432/postgres"
 sudo az keyvault secret set --name "spring-datasource-username" \
     --vault-name $KEYVAULTNAME \
-    --value "anjnak"$VERSION"@anjnapostgres"$VERSION
+    --value "anjna"$VERSION"@anjnapostgres"$VERSION
 sudo az keyvault secret set --name "spring-datasource-password" \
     --vault-name $KEYVAULTNAME \
     --value "Postgres"$VERSION
-sudo az keyvault set-policy --name $KEYVAULTNAME --spn $SP_PASSWORD --secret-permissions get list
+sudo az keyvault set-policy --name $KEYVAULTNAME --spn $SP_APPID --secret-permissions get list
 echo "########################## "
 echo -e  " Create Postgres Server"
 echo "######################### "
