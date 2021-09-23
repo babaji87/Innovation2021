@@ -15,7 +15,7 @@ LOCATION="eastus"
 SKU="Basic"
 SERVICEBUSNAME="anjnasb"$VERSION
 SERVICEBUSQUEUE="anjnaq"$VERSION
-KEYVAULTNAME="anjnavault"$VERSION
+KEYVAULTNAME="safevault"$VERSION
 POSTGRES_PASSWD="Postgres"$VERSION
 SERVICE_PRINCIPAL="anjnasp"$VERSION
 SP_TENANT_ID="8d09f28d-2b54-4761-98f1-de38762cd939"
@@ -55,8 +55,8 @@ sudo az keyvault create \
     --location $LOCATION \
     --query properties.vaultUri \
     --sku standard \
-    --enable-soft-delete true \
-    --enable-purge-protection true
+    --enable-soft-delete true 
+#    --enable-purge-protection true
 
 sudo az keyvault secret set --name "spring-datasource-url" \
     --vault-name $KEYVAULTNAME \
@@ -67,8 +67,6 @@ sudo az keyvault secret set --name "spring-datasource-username" \
 sudo az keyvault secret set --name "spring-datasource-password" \
     --vault-name $KEYVAULTNAME \
     --value "Postgres"$VERSION
-#sudo az keyvault key create --name "demoKey" -p software --vault-name $KEYVAULTNAME
-#sudo az keyvault set-policy --name -g $RESOURCE_GROUP --key-permissions get unwrapKey wrapKey --object-id $POSTGRES_DB
 sudo az keyvault set-policy --name $KEYVAULTNAME --spn $SP_PASSWORD --secret-permissions get list
 echo "########################## "
 echo -e  " Create Postgres Server"
