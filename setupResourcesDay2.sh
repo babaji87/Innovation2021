@@ -82,7 +82,8 @@ sudo az postgres server firewall-rule create \
     --name AllowMyIP \
     --start-ip-address 0.0.0.0 \
     --end-ip-address 255.255.255.255
-#sudo az keyvault set-policy --name -g $RESOURCE_GROUP --key-permissions get unwrapKey wrapKey --object-id $POSTGRES_DB
+
+sudo az keyvault set-policy --name $KEYVAULTNAME -g $RESOURCE_GROUP  --spn $SP_APPID --secret-permissions get list
 echo "########################## "
 echo -e "Creating service bus and queue for messaging"
 echo "########################## "
