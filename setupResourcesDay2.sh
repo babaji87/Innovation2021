@@ -63,12 +63,13 @@ sudo az keyvault secret set --name "spring-datasource-url" \
     --value "jdbc:postgresql://anjnapostgres"$VERION".postgres.database.azure.com:5432/postgres"
 sudo az keyvault secret set --name "spring-datasource-username" \
     --vault-name $KEYVAULTNAME \
-    --value "anjnak"$VERSION"anjnapostgres"$VERSION
+    --value "anjnak"$VERSION"@anjnapostgres"$VERSION
 sudo az keyvault secret set --name "spring-datasource-password" \
     --vault-name $KEYVAULTNAME \
     --value "Postgres"$VERSION
-sudo az keyvault key create --name "demoKey" -p software --vault-name $KEYVAULTNAME
+#sudo az keyvault key create --name "demoKey" -p software --vault-name $KEYVAULTNAME
 #sudo az keyvault set-policy --name -g $RESOURCE_GROUP --key-permissions get unwrapKey wrapKey --object-id $POSTGRES_DB
+sudo az keyvault set-policy --name $KEYVAULTNAME --spn $SP_PASSWORD --secret-permissions get list
 echo "########################## "
 echo -e  " Create Postgres Server"
 echo "######################### "
@@ -111,4 +112,4 @@ egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW
 egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
 egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 egrep -lRZ $POSTGRES_USER_NAME_ORIG | xargs -0 -l sed -i -e s/$POSTGRES_USER_NAME_ORIG/$POSTGRES_USER_NAME/g
-
+egrep -lRZ "anjnaq" | xargs -0 -l sed -i -e s/"anjnaq"/"anjnaq"$VERSION/g
