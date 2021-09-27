@@ -9,7 +9,6 @@ AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"
 ACR_REG_NEW_NAME="anjnaacr"$VERSION
 AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
-cd Step5
 echo "########################## "
 echo -e  " Create docker images and push them to ACR "
 echo "######################### "
