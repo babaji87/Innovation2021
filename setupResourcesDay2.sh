@@ -112,3 +112,23 @@ egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD
 egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
 egrep -lRZ $POSTGRES_USER_NAME_ORIG | xargs -0 -l sed -i -e s/$POSTGRES_USER_NAME_ORIG/$POSTGRES_USER_NAME/g
 egrep -lRZ "anjnaq" | xargs -0 -l sed -i -e s/"anjnaq"/"anjnaq"$VERSION/g
+cd stocks-master
+mvn install
+cd ..
+cd stocks-react-master
+npm clean install
+cd ..
+cd stocks-worker
+mvn clean install
+cd ..
+cd ..
+cd Step5
+cd stocks-master
+mvn install
+cd ..
+cd stocks-react-master
+npm install
+cd ..
+cd stocks-worker
+mvn install
+cd ..
