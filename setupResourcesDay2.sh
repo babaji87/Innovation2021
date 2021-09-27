@@ -54,8 +54,8 @@ sudo az keyvault create \
     --enabled-for-template-deployment true \
     --location $LOCATION \
     --query properties.vaultUri \
-    --sku standard \
-    --enable-soft-delete true 
+    --sku standard 
+#    --enable-soft-delete true 
 #    --enable-purge-protection true
 
 sudo az keyvault secret set --name "spring-datasource-url" \
