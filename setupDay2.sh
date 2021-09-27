@@ -9,7 +9,7 @@ AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"
 ACR_REG_NEW_NAME="anjnaacr"$VERSION
 AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
-
+cd Step5
 echo "########################## "
 echo -e  " Create docker images and push them to ACR "
 echo "######################### "
@@ -39,6 +39,5 @@ echo "######################### "
 sudo kubectl get nodes
 sudo az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME
 sudo kubectl get nodes
-cd Step3
 egrep -lRZ $ACR_REG_NAME | xargs -0 -l sed -i -e s/$ACR_REG_NAME/$ACR_REG_NEW_NAME/g
 sudo kubectl apply -f k8s
