@@ -22,7 +22,7 @@ public class QueueReceiveController {
     @JmsListener(destination = QUEUE_NAME, containerFactory = "jmsListenerContainerFactory")
     public void receiveMessage(String stock) {
         logger.info("Received message: {}", stock);
-        List<StocksData> stocks = stocksDataRepository.findBySymbol(stock);
+        List<StocksData> stocks = stocksDataRepository.findAll();
         StocksData max = Collections.max(stocks);
         System.out.println(max.getSymbol()+"  "+max.getLatestPrice()+"\n");
     }
