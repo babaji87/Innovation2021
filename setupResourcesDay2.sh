@@ -1,7 +1,7 @@
 echo "########################## "
 echo -e  " Set Shell variables"
 echo "######################### "
-VERSION=3
+VERSION=2
 SUBSCRIPTION="e247041b-0729-4095-9488-564fbc84a3b7"
 RESOURCE_GROUP="default"
 AKS_CLUSTER_NAME="anjnaaks"$VERSION
@@ -20,9 +20,9 @@ POSTGRES_PASSWD="Postgres"$VERSION
 SERVICE_PRINCIPAL="anjnasp"$VERSION
 SP_TENANT_ID="8d09f28d-2b54-4761-98f1-de38762cd939"
 CLIENT_ORIG_IP="10.1.207.97"
- CLIENT_NEW_IP="10.1.206.97"
+ CLIENT_NEW_IP="10.1.205.97"
  SERVER_ORIG_IP="10.1.207.98"
- SERVER_NEW_IP="10.1.206.98"
+ SERVER_NEW_IP="10.1.205.98"
  POSTGRES_ORIG_DB="anjnapostgres"
  POSTGRES_NEW_DB="anjnapostgres"$VERSION
  POSTGRES_ORIG_USER="anjnak@anjnapostgres"
@@ -120,15 +120,4 @@ npm clean install
 cd ..
 cd stocks-worker
 mvn clean install
-cd ..
-cd ..
-cd Step5
-cd stocks-master
-mvn install
-cd ..
-cd stocks-react-master
-npm install
-cd ..
-cd stocks-worker
-mvn install
 cd ..
