@@ -7,8 +7,8 @@ RESOURCE_GROUP="default"
 AKS_CLUSTER_NAME="anjnaaks"$VERSION
 AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"$VERSION
-POSTGRES_USER_NAME="anjna"$VERSION
-POSTGRES_USER_NAME_ORIG="anjnak"
+#POSTGRES_USER_NAME="anjna"$VERSION
+#POSTGRES_USER_NAME_ORIG="anjnak"
 AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
 POSTGRES_DB=anjnapostgres$VERSION
 LOCATION="eastus"
@@ -25,7 +25,7 @@ CLIENT_ORIG_IP="10.1.207.97"
  SERVER_NEW_IP="10.1.205.98"
  POSTGRES_ORIG_DB="anjnapostgres"
  POSTGRES_NEW_DB="anjnapostgres"$VERSION
- POSTGRES_ORIG_USER="anjnak@anjnapostgres"
+ POSTGRES_ORIG_USER="workeruser"
  POSTGRES_NEW_USER="anjna"$VERSION"@anjnapostgres"$VERSION
  POSTGRES_ORIG_PASSWD="Postgres1"
  POSTGRES_NEW_PASSWD="Postgres"$VERSION
@@ -107,10 +107,10 @@ egrep -lRZ "https://contosokvakm.vault.azure.net/" | xargs -0 -l sed -i -e s+"ht
 egrep -lRZ $SC_OLDCONNECTION | xargs -0 -l sed -i -e "s+$SC_OLDCONNECTION+$SBCONNSTRING+g"
 egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
 egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
-egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$/g
+egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
 egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
 egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
-egrep -lRZ $POSTGRES_USER_NAME_ORIG | xargs -0 -l sed -i -e s/$POSTGRES_USER_NAME_ORIG/$POSTGRES_USER_NAME/g
+#egrep -lRZ $POSTGRES_USER_NAME_ORIG | xargs -0 -l sed -i -e s/$POSTGRES_USER_NAME_ORIG/$POSTGRES_USER_NAME/g
 egrep -lRZ "anjnaq" | xargs -0 -l sed -i -e s/"anjnaq"/"anjnaq"$VERSION/g
 cd stocks-master
 mvn install
