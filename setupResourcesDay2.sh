@@ -7,7 +7,7 @@ RESOURCE_GROUP="default"
 AKS_CLUSTER_NAME="anjnaaks"$VERSION
 AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"$VERSION
-#POSTGRES_USER_NAME="anjna"$VERSION
+POSTGRES_USER_NAME="anjna"$VERSION
 #POSTGRES_USER_NAME_ORIG="anjnak"
 AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
 POSTGRES_DB=anjnapostgres$VERSION
@@ -73,7 +73,7 @@ echo -e  " Create Postgres Server"
 echo "######################### "
 sudo az account set -s $SUBSCRIPTION
 sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_DB --ssl-enforcement Disabled \
-    --location eastus --admin-user $POSTGRES_NEW_USER --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2 --assign-identity  
+    --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2 --assign-identity  
 sudo az postgres server firewall-rule create \
     --subscription $SUBSCRIPTION \
     --resource-group $RESOURCE_GROUP \
