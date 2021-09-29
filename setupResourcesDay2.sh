@@ -73,7 +73,7 @@ echo -e  " Create Postgres Server"
 echo "######################### "
 sudo az account set -s $SUBSCRIPTION
 sudo az postgres server create --resource-group $RESOURCE_GROUP  --name $POSTGRES_DB --ssl-enforcement Disabled \
-    --location eastus --admin-user $POSTGRES_USER_NAME --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2 --assign-identity  
+    --location eastus --admin-user $POSTGRES_NEW_USER --admin-password  $POSTGRES_PASSWD --sku-name GP_Gen5_2 --assign-identity  
 sudo az postgres server firewall-rule create \
     --subscription $SUBSCRIPTION \
     --resource-group $RESOURCE_GROUP \
