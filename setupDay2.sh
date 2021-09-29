@@ -9,6 +9,13 @@ AKS_VNET_SUBNET="default-"$VERSION
 ACR_REG_NAME="anjnaacr"
 ACR_REG_NEW_NAME="anjnaacr"$VERSION
 AKS_ROUTE_TABLE="anjna_aks_route_table"$VERSION
+
+echo "########################## "
+echo -e  " Create Container Registry "
+echo "######################### "
+
+sudo az acr create --resource-group $RESOURCE_GROUP \
+  --name $ACR_REG_NEW_NAME --sku Basic
 echo "########################## "
 echo -e  " Create docker images and push them to ACR "
 echo "######################### "
