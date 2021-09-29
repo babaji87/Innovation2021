@@ -24,9 +24,9 @@ echo "########################## "
 echo -e "Install Docker"
 echo "######################## "
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-sudo dnf install --nobest docker-ce
-sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-sudo dnf install docker-ce
+sudo dnf install -y --nobest docker-ce
+sudo dnf install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+sudo dnf install -y docker-ce
 sudo systemctl enable --now docker
 echo "########################## "
 echo -e "Install Docker Compose"
@@ -44,7 +44,7 @@ baseurl=https://packages.microsoft.com/yumrepos/azure-cli
 enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
-sudo dnf install azure-cli
+sudo dnf install -y azure-cli
 echo "############################"
 echo    "Install Kubernetes CLI#"
 echo "############################"
