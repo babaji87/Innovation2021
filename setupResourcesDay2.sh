@@ -31,7 +31,12 @@ CLIENT_ORIG_IP="10.1.207.97"
  POSTGRES_NEW_PASSWD="Postgres"$VERSION
  SC_OLDCONNECTION="Endpoint=sb://anjnasb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=oS39J7eYXEUUOPe9Nz8zRX1hiNpkH4FmXYSe8Glr78Y="
 
- 
+ echo "########################## "
+echo -e  " Create Container Registry "
+echo "######################### "
+
+sudo az acr create --resource-group $RESOURCE_GROUP \
+  --name $ACR_REG_NAME --sku $SKU
  echo "########################## "
  echo -e "creating the keyvault to store and retrieve secrets in our apps"
  echo "########################## "
