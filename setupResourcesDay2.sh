@@ -118,4 +118,5 @@ npm clean install
 cd ..
 cd stocks-worker
 mvn clean install
+mvn package
 cd ..
