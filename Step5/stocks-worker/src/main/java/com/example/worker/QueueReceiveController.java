@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @Component
 public class QueueReceiveController {
 
-    private static final String QUEUE_NAME = "anjnaq2";
+    private static final String QUEUE_NAME = "anjnaq";
 
     private final Logger logger = LoggerFactory.getLogger(QueueReceiveController.class);
     @Autowired
