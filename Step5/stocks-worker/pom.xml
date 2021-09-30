@@ -93,7 +93,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>dk.tbsalling.ais.cli.AisCli</mainClass>
+							<mainClass>com.example.worker.WorkerApplication</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
