@@ -1,6 +1,7 @@
 package com.example.worker;
 
 
+import com.example.worker.model.MaxStockData;
 import com.example.worker.model.StocksData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +20,15 @@ public class QueueReceiveController {
     private final Logger logger = LoggerFactory.getLogger(QueueReceiveController.class);
     @Autowired
     private StocksDataRepository stocksDataRepository;
+    @Autowired
+    private MaxStocksDataRepository maxStocksDataRepository;
     @JmsListener(destination = QUEUE_NAME, containerFactory = "jmsListenerContainerFactory")
     public void receiveMessage(String stock) {
         logger.info("Received message: {}", stock);
         List<StocksData> stocks = stocksDataRepository.findAll();
         StocksData max = Collections.max(stocks);
-        System.out.println(max.getSymbol()+"  "+max.getLatestPrice()+"\n");
+       // System.out.println(stock+"  "+max.getLatestPrice()+"\n");
+        maxStocksDataRepository.save(new MaxStockData(stock, max.getLatestPrice(), max.getLatestTime()));
     }
 
 }
