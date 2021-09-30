@@ -24,9 +24,9 @@ echo "########################## "
 echo -e "Install Docker"
 echo "######################## "
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
-sudo dnf install --nobest docker-ce
-sudo dnf install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
-sudo dnf install docker-ce
+sudo dnf install -y --nobest docker-ce
+sudo dnf install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.6-3.3.el7.x86_64.rpm
+sudo dnf install -y docker-ce
 sudo systemctl enable --now docker
 echo "########################## "
 echo -e "Install Docker Compose"
@@ -44,7 +44,7 @@ baseurl=https://packages.microsoft.com/yumrepos/azure-cli
 enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/azure-cli.repo
-sudo dnf install azure-cli
+sudo dnf install -y azure-cli
 echo "############################"
 echo    "Install Kubernetes CLI#"
 echo "############################"
@@ -54,22 +54,18 @@ sudo yum install -y kubectl
 echo "########################## "
 echo -e  " Build demo project"
 echo "######################### "
-export CLIENT_ORIG_IP="10.1.207.97"
-export CLIENT_NEW_IP="10.1.206.97"
-export SERVER_ORIG_IP="10.1.207.98"
-export SERVER_NEW_IP="10.1.206.98"
-export POSTGRES_ORIG_DB="anjnapostgres"
-export POSTGRES_NEW_DB="anjna1postgres"
-export POSTGRES_ORIG_USER="anjnak@anjnapostgres"
-export POSTGRES_NEW_USER="anjna1k@anjnapostgres"
-export POSTGRES_ORIG_PASSWD="Postgres1"
-export POSTGRES_NEW_PASSWD="Postgres2"
-cd Step3
-egrep -lRZ $CLIENT_ORIG_IP | xargs -0 -l sed -i -e s/$CLIENT_ORIG_IP/$CLIENT_NEW_IP/g
-egrep -lRZ $SERVER_ORIG_IP | xargs -0 -l sed -i -e s/$SERVER_ORIG_IP/$SERVER_NEW_IP/g
-egrep -lRZ $POSTGRES_ORIG_USER | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_USER/$POSTGRES_NEW_USER/g
-egrep -lRZ $POSTGRES_ORIG_PASSWD | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_PASSWD/$POSTGRES_NEW_PASSWD/g
-egrep -lRZ $POSTGRES_ORIG_DB | xargs -0 -l sed -i -e s/$POSTGRES_ORIG_DB/$POSTGRES_NEW_DB/g
+cd Step4
+cd stocks-master
+mvn install
+cd ..
+cd stocks-react-master
+npm install
+cd ..
+cd stocks-worker
+mvn install
+cd ..
+cd ..
+cd Step5
 cd stocks-master
 mvn install
 cd ..

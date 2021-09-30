@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div id="app-container">
         <SiteHeader>
-          <h3>Stock Dashboard as Docker container</h3>
+          <h3>Stock Dashboard as Docker container with Service Bus and Key vault added to the Mix!!</h3>
         </SiteHeader>
         <SiteContent>
           <StockDashboard>

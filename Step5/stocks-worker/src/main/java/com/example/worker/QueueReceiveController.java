@@ -34,6 +34,7 @@ public class QueueReceiveController {
                 stocks.add(x);
             }
         }
+
         StocksData max = Collections.max(stocks);
        // System.out.println(stock+"  "+max.getLatestPrice()+"\n");
         maxStocksDataRepository.save(new MaxStockData(stock, max.getLatestPrice(), max.getLatestTime()));
